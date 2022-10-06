@@ -29,9 +29,9 @@ async function main() {
   }
   const file = fs.readFileSync(core.getInput('lcov-path'));
   const coverages = parseLCOV(file.toString());
-  const branches = getMetric(coverages, 'branches');
   const lines = getMetric(coverages, 'lines');
-  const body = `<p>Covered ${getSummary(branches)} branches, ${getSummary(lines)} lines</p>`;
+  const packageName = core.getInput('package-name');
+  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines</p>`;
   const issue_number = context.payload.pull_request?.number;
   if (!issue_number) {
     return;

@@ -8,6 +8,9 @@ inputs:
   github-token:
     description: "secrets.GITHUB_TOKEN"
     required: true
+  package-name:
+    description: "Package or service name within monorepo"
+    required: true
   lcov-path:
     description: "Relative path of coverage/lcov.info"
     required: false
