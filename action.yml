@@ -11,6 +11,9 @@ inputs:
   package-name:
     description: "Package or service name within monorepo"
     required: true
+  coveralls-link:
+    description: "Link to the coveralls job."
+    required: true
   lcov-path:
     description: "Relative path of coverage/lcov.info"
     required: false

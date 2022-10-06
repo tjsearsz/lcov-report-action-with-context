@@ -8,10 +8,11 @@ No need to run if not triggered by pull_request
 
 ```yaml
     - name: Coverage Report on Pull Request with Additional Monorepo Context
-      uses: Subatomic-Agency/lcov-report-action-with-context@0.0.4
+      uses: Subatomic-Agency/lcov-report-action-with-context@0.0.5
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         package-name: monorepo-package-name
+        coveralls-link: https://path.to.your.build
         lcov-path: coverage/lcov.info
       if: github.event_name == 'pull_request'
 ```

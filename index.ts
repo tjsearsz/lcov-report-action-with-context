@@ -31,7 +31,8 @@ async function main() {
   const coverages = parseLCOV(file.toString());
   const lines = getMetric(coverages, 'lines');
   const packageName = core.getInput('package-name');
-  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines</p>`;
+  const coverallsLink = core.getInput('coveralls-link');
+  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines</p><p>See More on <a href="${coverallsLink}">Coveralls.</a>`;
   const issue_number = context.payload.pull_request?.number;
   if (!issue_number) {
     return;
