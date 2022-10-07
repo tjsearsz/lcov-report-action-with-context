@@ -26,10 +26,10 @@ function getSummary({hit, found, percent}: CoverageMetric) {
 function productionComparison({percent: productionPercent}: CoverageMetric, {percent: prPercent}: CoverageMetric) {
   const coverageDiff = prPercent - productionPercent
   if(coverageDiff < 0) {
-    return `decreased by ${coverageDiff.toFixed(1)} compared to`;
+    return `decreased by ${coverageDiff.toFixed(1)}% compared to`;
   }
   else if (coverageDiff > 0) {
-    return `increased by ${coverageDiff.toFixed(1)} compared to`;
+    return `increased by ${coverageDiff.toFixed(1)}% compared to`;
   }
   else {
     return "is equal with"
