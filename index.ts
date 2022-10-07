@@ -32,7 +32,7 @@ async function main() {
   const coverages = parseLCOV(file.toString());
   const productionCoverages = parseLCOV(productionCoveragefile.toString());
   const lines = getMetric(coverages, 'lines');
-  const productionLines = getMetric(productionCoverages, 'productionLines');
+  const productionLines = getMetric(productionCoverages, 'lines');
   const packageName = core.getInput('package-name');
   const coverallsLink = core.getInput('coveralls-link');
   const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines in this PR compared to ${getSummary(productionLines)} in production.</p><p>See More on <a href="${coverallsLink}">Coveralls.</a>`;
