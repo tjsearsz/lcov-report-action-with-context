@@ -16,8 +16,12 @@ inputs:
     required: true
   lcov-path:
     description: "Relative path of coverage/lcov.info"
-    required: false
+    required: true
     default: 'coverage/lcov.info'
+  production-lcov-path:
+    description: "Relative path of production coverage/lcov.info for comparison"
+    required: true
+    default: 'coverage/production.lcov.info'
 runs:
   using: "node12"
   main: "dist/index.js"

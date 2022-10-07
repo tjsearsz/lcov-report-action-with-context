@@ -28,11 +28,14 @@ async function main() {
     return;
   }
   const file = fs.readFileSync(core.getInput('lcov-path'));
+  const productionCoveragefile = fs.readFileSync(core.getInput('production-lcov-path'));
   const coverages = parseLCOV(file.toString());
+  const productionCoverages = parseLCOV(productionCoveragefile.toString());
   const lines = getMetric(coverages, 'lines');
+  const productionLines = getMetric(productionCoverages, 'productionLines');
   const packageName = core.getInput('package-name');
   const coverallsLink = core.getInput('coveralls-link');
-  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines</p><p>See More on <a href="${coverallsLink}">Coveralls.</a>`;
+  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines in this PR compared to ${getSummary(productionLines)} in production.</p><p>See More on <a href="${coverallsLink}">Coveralls.</a>`;
   const issue_number = context.payload.pull_request?.number;
   if (!issue_number) {
     return;
