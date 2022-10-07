@@ -23,6 +23,20 @@ function getSummary({hit, found, percent}: CoverageMetric) {
   return `${hit}/${found} (${percent.toFixed(1)}%)`;
 }
 
+function productionComparison({percent: productionPercent}: CoverageMetric, {percent: prPercent}: CoverageMetric) {
+  const coverageDiff = prPercent - productionPercent
+  if(coverageDiff < 0) {
+    return `decreased by ${coverageDiff.toFixed(1)} compared to`;
+  }
+  else if (coverageDiff > 0) {
+    return `increased by ${coverageDiff.toFixed(1)} compared to`;
+  }
+  else {
+    return "is equal with"
+  }
+}
+
+
 async function main() {
   if (context.eventName != 'pull_request') {
     return;
@@ -33,9 +47,10 @@ async function main() {
   const productionCoverages = parseLCOV(productionCoveragefile.toString());
   const lines = getMetric(coverages, 'lines');
   const productionLines = getMetric(productionCoverages, 'lines');
+  const productionReport = productionComparison(productionLines, lines);
   const packageName = core.getInput('package-name');
   const coverallsLink = core.getInput('coveralls-link');
-  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)} lines in this PR compared to ${getSummary(productionLines)} in production.</p><p>See More on <a href="${coverallsLink}">Coveralls.</a>`;
+  const body = `<p><b>Service: ${packageName}</b></p><p>Covered ${getSummary(lines)}. Coverage ${productionReport} production.</p><p>See More on <a href="${coverallsLink}">Coveralls.</a>`;
   const issue_number = context.payload.pull_request?.number;
   if (!issue_number) {
     return;
