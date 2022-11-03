@@ -46,8 +46,11 @@ async function main() {
 
   const stream = fg.stream("./packages/**/coverage/lcov.info");
 
+  console.log("el stream: ", stream);
+
   let body = "";
   for await (const entry of stream) {
+    console.log("el entry: ", entry);
     const coverages = parseLCOV(entry.toString());
     const lines = getMetric(coverages, "lines");
 
