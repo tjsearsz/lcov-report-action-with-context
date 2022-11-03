@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 import parseLCOV from "parse-lcov";
-import fs from "fs";
+// import fs from "fs";
 import fg from "fast-glob";
 
 interface CoverageMetric {
@@ -25,7 +25,7 @@ function getSummary({ hit, found, percent }: CoverageMetric) {
   return `${hit}/${found} (${percent.toFixed(1)}%)`;
 }
 
-function productionComparison(
+/* function productionComparison(
   { percent: productionPercent }: CoverageMetric,
   { percent: prPercent }: CoverageMetric
 ) {
@@ -37,7 +37,7 @@ function productionComparison(
   } else {
     return "is equal with";
   }
-}
+} */
 
 async function main() {
   if (context.eventName != "pull_request") {
