@@ -1,6 +1,6 @@
 name: "Coverage Report for lcov format with monorepo context support personalized"
 description: "Comments a pull request with code coverage"
-author: "Forked from: nohmand
+author: "Forked from: nohmand"
 branding:
   icon: "check-square"
   color: "green"
